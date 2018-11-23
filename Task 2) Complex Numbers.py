@@ -19,11 +19,11 @@ class ComplexNumber:
         return self.real == other.real and self.imaginary == other.imaginary
 
     def __str__(self):
-        return '{0} + {1}i'.format(self.real, self.imaginary)
+        return '{0} + {1}i'.format(self.real, self.imaginary) if self.real else '{0}i'.format(self.imaginary if self.imaginary else '')
 
 
 def main():
-    a = ComplexNumber(5, 2)
+    a = ComplexNumber(0, 9)
     b = ComplexNumber(10, 5)
     c = ComplexNumber(5, 2)
     print('Str: a = {0} , b = {1} , c = {2} '.format(a, b, c))
