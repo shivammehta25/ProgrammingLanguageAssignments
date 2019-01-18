@@ -13,7 +13,7 @@ class ComplexNumber:
         return ComplexNumber(self.real - other.real, self.imaginary - other.imaginary)
 
     def __mul__(self, other):
-        return ComplexNumber(self.real*other.real, self.imaginary * other.imaginary)
+        return ComplexNumber(self.real*other.real-self.imaginary * other.imaginary, self.real * other.imaginary + self.imaginary*other.real)
 
     def __eq__(self, other):
         return self.real == other.real and self.imaginary == other.imaginary
