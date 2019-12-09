@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 from sklearn.base import BaseEstimator
 from sklearn.neighbors import KDTree
-import math
-import numpy as np
 from random import shuffle
 from sklearn.metrics import f1_score
+
 
 class KNearestNeighbour(BaseEstimator):
     def __init__(self, neighbors=5):
@@ -19,13 +18,11 @@ class KNearestNeighbour(BaseEstimator):
         return self
 
     def predict(self, X):
-        # Predict the class labels for the provided data
         X, true_labels = self.split_data_and_labels(X)
         dist,  ind = self.tree.query(X, k=self.neighbors)
         predictions = []
-        # print(ind)
         for x in range(len(X)):
-            labels = {0: 0, 1: 0}  # dict of possible labels -- 0 and 1
+            labels = {0: 0, 1: 0}
             for i in range(len(ind[x])):
                 label = self.labels[ind[x][i]]
                 labels[label] += 1
@@ -35,6 +32,7 @@ class KNearestNeighbour(BaseEstimator):
         return predictions
 
     def load_dataset(self, filename, split):
+
         with open(filename) as f:
             dataset = f.readlines()
         shuffle(dataset)
@@ -59,7 +57,7 @@ class KNearestNeighbour(BaseEstimator):
 
 
 def main():
-    model = KNearestNeighbour(neighbors=5)
+    model = KNearestNeighbour(neighbors=3)
     model.load_dataset('/Users/shivam/PycharmProjects/ProgrammingLanguageTask1/data/KNN_dataset.txt', 0.66)
     model.fit()
     model.predict(model.test_set)
